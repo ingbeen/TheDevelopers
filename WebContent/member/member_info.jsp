@@ -15,27 +15,15 @@ MemberBean member = (MemberBean) request.getAttribute("member");
 	<table border="1" align="center" width="300">
 		<tr align="center">
 			<td>아이디 : </td>
-			<td><%=member.getMEMBER_ID() %></td>
+			<td><%=member.getMember_id()%></td>
 		</tr>
 		<tr align="center">
 			<td>비밀번호 : </td>
-			<td><%=member.getMEMBER_PW() %></td>
-		</tr>
-		<tr align="center">
-			<td>이름 : </td>
-			<td><%=member.getMEMBER_NAME() %></td>
-		</tr>
-		<tr align="center">
-			<td>나이 : </td>
-			<td><%=member.getMEMBER_AGE() %></td>
-		</tr>
-		<tr align="center">
-			<td>성별 : </td>
-			<td><%=member.getMEMBER_GENDER() %></td>
+			<td><%=member.getMember_pw()%></td>
 		</tr>
 		<tr align="center">
 			<td>이메일주소 : </td>
-			<td><%=member.getMEMBER_EMAIL() %></td>
+			<td><%=member.getMember_email()%></td>
 		</tr>
 		<tr align="center">
 			<td colspan="2"><a href="MemberListAction.me">리스트로 돌아가기</a></td>

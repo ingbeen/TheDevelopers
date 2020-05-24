@@ -1,14 +1,17 @@
 package net.member.db;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 public class MemberDAO {
@@ -35,11 +38,11 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member.getMEMBER_ID());
+			pstmt.setString(1, member.getMember_id());
 			rs = pstmt.executeQuery();
-
+			
 			if (rs.next()) {
-				if (rs.getString("MEMBER_PW").equals(member.getMEMBER_PW())) {
+				if (rs.getString("MEMBER_PW").equals(member.getMember_pw())) {
 					result = 1; // 일치
 				} else {
 					result = 0; // 불일치
@@ -70,24 +73,31 @@ public class MemberDAO {
 	}
 	
 	// 회원가입
-	public boolean joinMember(MemberBean member) {
-		String sql = "INSERT INTO MEMBER VALUES (?, ? ,?, ?, ?, ?)";
+	public boolean joinMember(MemberBean member, HttpServletResponse response) throws Exception {
+		String sql = "INSERT INTO MEMBER VALUES (?, ? ,?)";
 		int result = 0;
 
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member.getMEMBER_ID());
-			pstmt.setString(2, member.getMEMBER_PW());
-			pstmt.setString(3, member.getMEMBER_NAME());
-			pstmt.setInt(4, member.getMEMBER_AGE());
-			pstmt.setString(5, member.getMEMBER_GENDER());
-			pstmt.setString(6, member.getMEMBER_EMAIL());
+			pstmt.setString(1, member.getMember_id());
+			pstmt.setString(2, member.getMember_pw());
+			pstmt.setString(3, member.getMember_email());
 			result = pstmt.executeUpdate();
 
 			if (result != 0) {
 				return true;
 			}
+		} catch(SQLIntegrityConstraintViolationException sqle) {
+			String err = sqle.toString();
+			if (err.contains("무결성")) {
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('아이디가 존재합니다');"
+						+ "location.href='./singInUp.me';</script>");
+				out.close();
+			}
+			System.out.println("joinMember 에러 : " + sqle);
 		} catch (Exception ex) {
 			System.out.println("joinMember 에러 : " + ex);
 		} finally {
@@ -117,12 +127,9 @@ public class MemberDAO {
 
 			while (rs.next()) {
 				MemberBean mb = new MemberBean();
-				mb.setMEMBER_ID(rs.getString("MEMBER_ID"));
-				mb.setMEMBER_PW(rs.getString("MEMBER_PW"));
-				mb.setMEMBER_NAME(rs.getString("MEMBER_NAME"));
-				mb.setMEMBER_AGE(rs.getInt("MEMBER_AGE"));
-				mb.setMEMBER_GENDER(rs.getString("MEMBER_GENDER"));
-				mb.setMEMBER_EMAIL(rs.getString("MEMBER_EMAIL"));
+				mb.setMember_id(rs.getString("MEMBER_ID"));
+				mb.setMember_pw(rs.getString("MEMBER_PW"));
+				mb.setMember_email(rs.getString("MEMBER_EMAIL"));
 
 				memberlist.add(mb);
 			}
@@ -162,12 +169,9 @@ public class MemberDAO {
 			rs.next();
 			
 			MemberBean mb = new MemberBean();
-			mb.setMEMBER_ID(rs.getString("MEMBER_ID"));
-			mb.setMEMBER_PW(rs.getString("MEMBER_PW"));
-			mb.setMEMBER_NAME(rs.getString("MEMBER_NAME"));
-			mb.setMEMBER_AGE(rs.getInt("MEMBER_AGE"));
-			mb.setMEMBER_GENDER(rs.getString("MEMBER_GENDER"));
-			mb.setMEMBER_EMAIL(rs.getString("MEMBER_EMAIL"));
+			mb.setMember_id(rs.getString("MEMBER_ID"));
+			mb.setMember_pw(rs.getString("MEMBER_PW"));
+			mb.setMember_email(rs.getString("MEMBER_EMAIL"));
 
 			return mb;
 		} catch (Exception ex) {

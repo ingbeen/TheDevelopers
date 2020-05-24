@@ -1,5 +1,7 @@
 package net.member.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,23 +20,18 @@ public class MemberJoinAction implements Action {
 		
 		boolean result = false;
 		
-		member.setMEMBER_ID(request.getParameter("MEMBER_ID"));
-		member.setMEMBER_PW(request.getParameter("MEMBER_PW"));
-		member.setMEMBER_NAME(request.getParameter("MEMBER_NAME"));
-		member.setMEMBER_AGE(Integer.parseInt(request.getParameter("MEMBER_AGE")));
-		member.setMEMBER_GENDER(request.getParameter("MEMBER_GENDER"));
-		member.setMEMBER_EMAIL(request.getParameter("MEMBER_EMAIL"));
-		
-		result = memberdao.joinMember(member);
+		member.setMember_id(request.getParameter("member_id"));
+		member.setMember_pw(request.getParameter("member_pw"));
+		member.setMember_email(request.getParameter("member_email"));
+		result = memberdao.joinMember(member, response);
 		
 		if (result == false) {
-			System.out.println("회원가입 실패");
 			return null;
 		}
 		
 		// 회원가입 성공
 		forward.setRedirect(true);
-		forward.setPath("./MemberLogin.me");
+		forward.setPath("./singInUp.me");
 		return forward;
 	}
 

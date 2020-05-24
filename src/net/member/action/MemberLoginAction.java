@@ -20,30 +20,29 @@ public class MemberLoginAction implements Action {
 		MemberBean member = new MemberBean();
 		
 		int result = -1;
-		member.setMEMBER_ID(request.getParameter("MEMBER_ID"));
-		member.setMEMBER_PW(request.getParameter("MEMBER_PW"));
+		member.setMember_id(request.getParameter("member_id"));
+		member.setMember_pw(request.getParameter("member_pw"));
 		result = memberdao.isMember(member);
 		
 		if (result == 0) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('비밀번호가 일치하지 않습니다');"
-					+ "location.href='./MemberLogin.me';</script>");
+					+ "location.href='./singInUp.me';</script>");
 			out.close();
 			return null;
 		} else if (result == -1) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('아이디가 존재하지 않습니다');"
-					+ "location.href='./MemberLogin.me';</script>");
+					+ "location.href='./singInUp.me';</script>");
 			out.close();
 			return null;
 		}
 		
 		// 로그인 성공
-		String id = member.getMEMBER_ID();
+		String id = member.getMember_id();
 		session.setAttribute("id", id);
-		
 		forward.setRedirect(true);
 		
 		if (id.equals("admin")) {
@@ -54,5 +53,4 @@ public class MemberLoginAction implements Action {
 		
 		return forward;
 	}
-
 }

@@ -14,13 +14,14 @@ public class BoardListAction implements Action {
 			HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("id");
-
-		if (id == null) {
-			forward.setRedirect(true);
-			forward.setPath("./MemberLogin.me");
-			return forward;
-		}
+		
+//		String id = (String) session.getAttribute("id");
+//
+//		if (id == null) {
+//			forward.setRedirect(true);
+//			forward.setPath("./MemberLogin.me");
+//			return forward;
+//		}
 
 		BoardDAO boarddao = new BoardDAO();
 		List<BoardBean> boardlist = new ArrayList<>();
@@ -78,7 +79,7 @@ public class BoardListAction implements Action {
 		// 리퀘스트에 담아서 setRedirect를 false로 지정하여
 		// forward로 이동하게끔 하여 리퀘스트를 다음 페이지로 전달한다
 		forward.setRedirect(false);
-		forward.setPath("./board/qna_board_list.jsp");
+		forward.setPath("./index.jsp");
 		return forward;
 	}
 }

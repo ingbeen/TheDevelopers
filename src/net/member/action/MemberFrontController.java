@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.board.action.*;
+
 // 서블릿 파일은 extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet를 상속받는다
 public class MemberFrontController extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
 	// 버전관리를 위한 값
@@ -23,73 +25,93 @@ public class MemberFrontController extends javax.servlet.http.HttpServlet implem
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
-		ActionForward forward = null;
-		Action action = null;
+		ActionForward memberForward = null;
+		net.board.action.ActionForward boradForward = null;
+		Action memberAction = null;
+		net.board.action.Action boradAction = null;
 
 		System.out.println("REquestURI :" + RequestURI);
 		System.out.println("contextPath :" + contextPath);
 		System.out.println("command :" + command);
+		
+		int check = 0;
 
 		if (command.equals("/")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("./member/loginForm.jsp");
-		} else if (command.equals("/MemberLogin.me")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("./member/loginForm.jsp");
-		} else if (command.equals("/MemberJoin.me")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("./member/joinForm.jsp");
-		} else if (command.equals("/MemberLoginAction.me")) {
-			action = new MemberLoginAction();
+			boradAction = new BoardListAction();
+			check = 1;
 			try {
-				forward = action.execute(request, response);
+				System.out.println(11);
+				boradForward = boradAction.execute(request, response);
+				System.out.println(22);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/singInUp.me")) {
+			check = 2;
+			memberForward = new ActionForward();
+			memberForward.setRedirect(false);
+			memberForward.setPath("./member/singInUp.jsp");
+		} else if (command.equals("/MemberLoginAction.me")) {
+			check = 2;
+			memberAction = new MemberLoginAction();
+			try {
+				memberForward = memberAction.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/MemberJoinAction.me")) {
-			action = new MemberJoinAction();
+			check = 2;
+			memberAction = new MemberJoinAction();
 			try {
-				forward = action.execute(request, response);
+				memberForward = memberAction.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/MemberListAction.me")) {
-			action = new MemberListAction();
+			memberAction = new MemberListAction();
 			try {
-				forward = action.execute(request, response);
+				memberForward = memberAction.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/MemberViewAction.me")) {
-			action = new MemberViewAction();
+			memberAction = new MemberViewAction();
 			try {
-				forward = action.execute(request, response);
+				memberForward = memberAction.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/MemberDeleteAction.me")) {
-			action = new MemberDeleteAction();
+			memberAction = new MemberDeleteAction();
 			try {
-				forward = action.execute(request, response);
+				memberForward = memberAction.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		System.out.println(forward.isRedirect());
-		if (forward != null) {
+		
+		if (check == 1) {
+			System.out.println(boradForward.isRedirect());
 			// 주소랑 페이지 바꿈
-			if (forward.isRedirect()) {
-				response.sendRedirect(forward.getPath());
+			if (boradForward.isRedirect()) {
+				response.sendRedirect(boradForward.getPath());
 			} else {
 				// 페이지만 바꿈
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				RequestDispatcher dispatcher = request.getRequestDispatcher(boradForward.getPath());
 				dispatcher.forward(request, response);
 			}
-		}
+		} else if (check == 2) {
+			System.out.println(memberForward.isRedirect());
+			// 주소랑 페이지 바꿈
+			if (memberForward.isRedirect()) {
+				response.sendRedirect(memberForward.getPath());
+			} else {
+				// 페이지만 바꿈
+				RequestDispatcher dispatcher = request.getRequestDispatcher(memberForward.getPath());
+				dispatcher.forward(request, response);
+			}
+		} 
 	}
 	
 	// servlet 클래스를 직접 만든 것

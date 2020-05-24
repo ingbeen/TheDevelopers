@@ -1,0 +1,41 @@
+@import
+	url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900&display=swap')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap')
+	;
+
+* {
+	/* width, height는 패딩과 보더를 포함 */
+	box-sizing: border-box;
+	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.container {
+	max-width: 1140px;
+	margin: auto;
+}
+
+.row {
+	/* flex는 가로방향으로 배치되고, 자신의 내용물만큼의 width를 차지하게 된다
+	height는 컨테이너의 높이만큼 늘어난다 */
+	display: flex;
+	/* 한줄에 담을 여유공간이 없을시에 대한 줄바꿈 처리 */
+	flex-wrap: wrap;
+	/* justify-content는 flex의 속성이다. 요소의 수평 방향 정렬 방식을 설정한다.
+	space-between은 요소들 사이에만 여유공간을 두고 배치 */
+	justify-content: space-between;
+	align-items: center;
+}
+
+/*Home*/
+.Home table {
+	margin: 0px auto;
+	padding: 50px 80px;
+}
+
+.Home td {
+	text-align: center;
+}

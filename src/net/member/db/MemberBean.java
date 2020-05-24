@@ -1,48 +1,28 @@
 package net.member.db;
 
 public class MemberBean {
-	private String MEMBER_ID;
-	private String MEMBER_PW;
-	private String MEMBER_NAME;
-	private int MEMBER_AGE;
-	private String MEMBER_GENDER;
-	private String MEMBER_EMAIL;
+	private String member_id;
+	private String member_pw;
+	private String member_email;
 	
-	public String getMEMBER_ID() {
-		return MEMBER_ID;
+	public String getMember_id() {
+		return member_id;
 	}
-	public void setMEMBER_ID(String mEMBER_ID) {
-		MEMBER_ID = mEMBER_ID;
+	public void setMember_id(String mEMBER_ID) {
+		member_id = mEMBER_ID;
 	}
-	public String getMEMBER_PW() {
-		return MEMBER_PW;
+	public String getMember_pw() {
+		return member_pw;
 	}
-	public void setMEMBER_PW(String mEMBER_PW) {
-		MEMBER_PW = mEMBER_PW;
+	public void setMember_pw(String mEMBER_PW) {
+		member_pw = mEMBER_PW;
 	}
-	public String getMEMBER_NAME() {
-		return MEMBER_NAME;
+	
+	public String getMember_email() {
+		return member_email;
 	}
-	public void setMEMBER_NAME(String mEMBER_NAME) {
-		MEMBER_NAME = mEMBER_NAME;
-	}
-	public int getMEMBER_AGE() {
-		return MEMBER_AGE;
-	}
-	public void setMEMBER_AGE(int mEMBER_AGE) {
-		MEMBER_AGE = mEMBER_AGE;
-	}
-	public String getMEMBER_GENDER() {
-		return MEMBER_GENDER;
-	}
-	public void setMEMBER_GENDER(String mEMBER_GENDER) {
-		MEMBER_GENDER = mEMBER_GENDER;
-	}
-	public String getMEMBER_EMAIL() {
-		return MEMBER_EMAIL;
-	}
-	public void setMEMBER_EMAIL(String mEMBER_EMAIL) {
-		MEMBER_EMAIL = mEMBER_EMAIL;
+	public void setMember_email(String mEMBER_EMAIL) {
+		member_email = mEMBER_EMAIL;
 	}
 	
 }

@@ -21,12 +21,12 @@ List<MemberBean> memberlist = (List<MemberBean>)request.getAttribute("memberlist
 		%>
 		<tr align="center">
 			<td>
-				<a href="MemberViewAction.me?id=<%=member.getMEMBER_ID() %>">
-					<%=member.getMEMBER_ID() %>
+				<a href="MemberViewAction.me?id=<%=member.getMember_id()%>">
+					<%=member.getMember_id()%>
 				</a>
 			</td>
 			<td>
-				<a href="MemberDeleteAction.me?id=<%=member.getMEMBER_ID() %>">
+				<a href="MemberDeleteAction.me?id=<%=member.getMember_id()%>">
 					삭제
 				</a>
 			</td>
