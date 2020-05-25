@@ -44,10 +44,30 @@
 					</div>
 				</div>
 				<div class="login">
+				<%
+					if (id == null) {
+				%>	
 					<ul>
-						<li><a href="./singInUp.me">로그인</a></li>
-						<li><a href="">회원가입</a></li>
+						<li><a href="./singInUp.me">로그인 / 회원가입</a></li>
 					</ul>
+				<%	
+					} else {
+						if (id.equals("admin")) {
+				%>
+						<ul>
+							<li><a href="./MemberListAction.me">회원관리</a></li>
+							<li><a href="./MemberLogoutAction.me">로그아웃</a></li>
+						</ul>
+				<% 
+						} else {
+				%>			
+						<ul>
+							<li><a href="./MemberLogoutAction.me">로그아웃</a></li>
+						</ul>
+				<% 
+						}
+					}
+				%>
 				</div>
 			</div>
 		</div>
@@ -75,23 +95,28 @@
 		<div class="container">
 			<table>
 				<tr>
-					<td colspan="5">최신글</td>
+					<td class="left caption" colspan="4">최신글</td>
+					<td class="right">
+						<div class="write">
+							<a href="./BoardWrite.bo">[글쓰기]</a>
+						</div>
+					</td>
 				</tr>
 				
-				<tr>
-					<td width="8%">
+				<tr class="center">
+					<td width="80px">
 						<div>번호</div>
 					</td>
-					<td width="50%">
+					<td width="450px">
 						<div>제목</div>
 					</td>
-					<td width="14%">
+					<td width="130px">
 						<div>작성자</div>
 					</td>
-					<td width="17%">
+					<td width="140px">
 						<div>날짜</div>
 					</td>
-					<td width="11%">
+					<td width="100px">
 						<div>조회수</div>
 					</td>
 				</tr>
@@ -101,12 +126,12 @@
 				for (int i = 0; i < boardList.size(); i++) {
 					BoardBean bl = (BoardBean) boardList.get(i);
 				%>
-				<tr>
-					<td>
+				<tr class="contents">
+					<td class="center">
 						<%=num %>
 					</td>
-					<td>
-						<div>
+					<td class="left">
+						<div class="subject">
 							<%if (bl.getBOARD_RE_LEV() != 0) { %>
 								<%for (int a = 0; a <= bl.getBOARD_RE_LEV() * 2; a++) { %>
 								&nbsp;
@@ -120,13 +145,13 @@
 							</a>
 						</div>
 					</td>
-					<td>
+					<td class="center">
 						<div><%=bl.getBOARD_ID()%></div>
 					</td>
-					<td>
+					<td class="center">
 						<div><%=bl.getBOARD_DATE()%></div>
 					</td>
-					<td>
+					<td class="center">
 						<div><%=bl.getBOARD_READCOUNT()%></div>
 					</td>
 				</tr>
@@ -135,10 +160,10 @@
 				} 
 				%>
 				
-				<tr>
+				<tr class="center number">
 					<td colspan="5">
 						<%if (nowpage <= 1) { %> 
-							[이전]&nbsp; 
+							[이전]
 						<%} else { %> 
 							<a href="./BoardList.bo?page=<%=nowpage - 1%>">[이전]</a>&nbsp; 
 						<%} %> 
@@ -148,29 +173,25 @@
 		 					<%} else { %> 
 		 						<a href="./BoardList.bo?page=<%=a%>">
 		 							[<%=a%>]
-								</a>&nbsp;
+								</a>
 							<%} %> 
 						<%} %>
 						<%if (nowpage >= maxpage) { %> 
-							[다음] 
+							[다음]
 						<%} else { %>
 							<a href="./BoardList.bo?page=<%=nowpage + 1%>">
 							[다음]</a> 
 							<%} %>
 					</td>
 				</tr>
-				
-				<tr>
-					<td colspan="5">
-						<%if (id != null && id.equals("admin")) { %>
-						<a href="./MemberListAction.me">[회원관리]</a>
-						<%} %> 
-						<a href="./BoardWrite.bo">[글쓰기]</a>
-					</td>
-				</tr>
 			</table>
+			<!-- 꼬리말 -->
+			<br><br>
+			구현 기능<br>
+			우측 상단 : 로그인 / 회원가입 --- 'admin'으로 로그인하면 회원관리, 로그아웃 탭 생성(그외는 로그아웃 탭 생성)<br>
+			그외 게시판 기능 동일
 		</div>
-	</section>
+	</section> 
 	<!-- End Home -->
 
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>

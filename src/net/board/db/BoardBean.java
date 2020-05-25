@@ -14,7 +14,7 @@ public class BoardBean {
 	private int BOARD_READCOUNT; // 조회수
 	private Date BOARD_DATE;
 	
-	public int getBOARD_NUM() {
+	public int getBOARD_NUM() { 
 		return BOARD_NUM;
 	}
 	public void setBOARD_NUM(int bOARD_NUM) {

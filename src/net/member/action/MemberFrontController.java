@@ -40,9 +40,7 @@ public class MemberFrontController extends javax.servlet.http.HttpServlet implem
 			boradAction = new BoardListAction();
 			check = 1;
 			try {
-				System.out.println(11);
 				boradForward = boradAction.execute(request, response);
-				System.out.println(22);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -59,6 +57,14 @@ public class MemberFrontController extends javax.servlet.http.HttpServlet implem
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/MemberLogoutAction.me")) {
+			check = 2;
+			memberAction = new MemberLogoutAction();
+			try {
+				memberForward = memberAction.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("/MemberJoinAction.me")) {
 			check = 2;
 			memberAction = new MemberJoinAction();
@@ -68,13 +74,17 @@ public class MemberFrontController extends javax.servlet.http.HttpServlet implem
 				e.printStackTrace();
 			}
 		} else if (command.equals("/MemberListAction.me")) {
+			check = 2;
+			System.out.println("list");
 			memberAction = new MemberListAction();
+			System.out.println("list11");
 			try {
 				memberForward = memberAction.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/MemberViewAction.me")) {
+			check = 2;
 			memberAction = new MemberViewAction();
 			try {
 				memberForward = memberAction.execute(request, response);
@@ -82,6 +92,7 @@ public class MemberFrontController extends javax.servlet.http.HttpServlet implem
 				e.printStackTrace();
 			}
 		} else if (command.equals("/MemberDeleteAction.me")) {
+			check = 2;
 			memberAction = new MemberDeleteAction();
 			try {
 				memberForward = memberAction.execute(request, response);

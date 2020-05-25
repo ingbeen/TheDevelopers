@@ -44,13 +44,7 @@ public class MemberLoginAction implements Action {
 		String id = member.getMember_id();
 		session.setAttribute("id", id);
 		forward.setRedirect(true);
-		
-		if (id.equals("admin")) {
-			forward.setPath("./MemberListAction.me");
-		} else {
-			forward.setPath("./BoardList.bo");
-		}
-		
+		forward.setPath("./");
 		return forward;
 	}
 }

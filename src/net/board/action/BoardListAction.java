@@ -13,15 +13,6 @@ public class BoardListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
-		HttpSession session = request.getSession();
-		
-//		String id = (String) session.getAttribute("id");
-//
-//		if (id == null) {
-//			forward.setRedirect(true);
-//			forward.setPath("./MemberLogin.me");
-//			return forward;
-//		}
 
 		BoardDAO boarddao = new BoardDAO();
 		List<BoardBean> boardlist = new ArrayList<>();

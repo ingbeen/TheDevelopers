@@ -127,9 +127,9 @@ public class MemberDAO {
 
 			while (rs.next()) {
 				MemberBean mb = new MemberBean();
-				mb.setMember_id(rs.getString("MEMBER_ID"));
-				mb.setMember_pw(rs.getString("MEMBER_PW"));
-				mb.setMember_email(rs.getString("MEMBER_EMAIL"));
+				mb.setMember_id(rs.getString("member_id"));
+				mb.setMember_pw(rs.getString("member_pw"));
+				mb.setMember_email(rs.getString("member_email"));
 
 				memberlist.add(mb);
 			}

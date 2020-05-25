@@ -25,13 +25,13 @@ public class MemberListAction implements Action {
 		String id = (String) session.getAttribute("id");
 		if (id == null) {
 			forward.setRedirect(true);
-			forward.setPath("./MemberLogin.me");
+			forward.setPath("./singInUp.me");
 			return forward;
 		} else if (!id.contentEquals("admin")) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('관리자가 아닙니다');"
-					+ "location.href='./MemberLogin.me';</script>");
+					+ "location.href='./singInUp.me';</script>");
 			out.close();
 			return null;
 		}

@@ -3,8 +3,8 @@ function IDCheck (joinform) {
 	var member_id = joinform.member_id.value;
 	
 	// 자릿수 검사
-	if (member_id.length < 6 || 15 < member_id.length) {
-		alert("아이디는 최소 6 ~ 최대 15자리를 입력해주십시오")
+	if (member_id.length < 5 || 15 < member_id.length) {
+		alert("아이디는 최소 5 ~ 최대 15자리를 입력해주십시오")
 		joinform.member_id.focus();
 		return false;
 	} else {
